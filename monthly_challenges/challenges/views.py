@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponse, HttpResponseNotFound, HttpResponseRedirect
+from django.http import HttpResponseNotFound, HttpResponseRedirect
 from django.urls import reverse
 
 monthly_challenges = {
@@ -14,15 +14,13 @@ monthly_challenges = {
     "september": "run",
     "october": "jump",
     "november": "drive",
-    "december": "drink",
+    "december": None,
 }
 
 
 def index(request):
     months = list(monthly_challenges.keys())
-    return render(request, "challenges/index.html", {
-        "months": months
-    })
+    return render(request, "challenges/index.html", {"months": months})
 
 
 def monthly_challenge_by_number(request, month):
@@ -36,12 +34,13 @@ def monthly_challenge_by_number(request, month):
     return HttpResponseRedirect(redirect_path)
 
 
-def monthly_challenge(request,  month):
+def monthly_challenge(request, month):
     try:
         challenge_text = monthly_challenges[month]
-        return render(request, "challenges/challenge.html", {
-            "month": month,
-            "text": challenge_text
-        })
-    except:
+        return render(
+            request,
+            "challenges/challenge.html",
+            {"month": month, "text": challenge_text},
+        )
+    except Exception:
         return HttpResponseNotFound("<h1>Not found</h1>")
