@@ -1,6 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponseNotFound, HttpResponseRedirect, Http404
-from django.template.loader import render_to_string
+from django.http import HttpResponseRedirect, Http404
 from django.urls import reverse
 
 monthly_challenges = {
