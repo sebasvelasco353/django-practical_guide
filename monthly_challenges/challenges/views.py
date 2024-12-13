@@ -40,7 +40,7 @@ def monthly_challenge(request, month):
         return render(
             request,
             "challenges/challenge.html",
-            {"month": month, "text": challenge_text},
+            {"text": challenge_text, "month": month},
         )
-    except Exception:
+    except:
         raise Http404()
